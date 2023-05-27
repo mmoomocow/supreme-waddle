@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 171541446}
   - component: {fileID: 171541445}
   - component: {fileID: 171541444}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -808,8 +808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19631a4fbfb37254a99de424fba3681b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  cast_radius: 0
+  player: {fileID: 171541441}
+  cast_radius: 3
 --- !u!1 &1154535554
 GameObject:
   m_ObjectHideFlags: 0
