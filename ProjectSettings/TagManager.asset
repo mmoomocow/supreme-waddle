@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - background
   layers:
   - Default
   - TransparentFX
@@ -11,6 +13,19 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - tilemap
   - 
   - 
   - 
@@ -23,20 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - background
   m_SortingLayers:
   - name: Default
     uniqueID: 0
