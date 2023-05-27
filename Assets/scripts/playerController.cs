@@ -28,8 +28,8 @@ public class playerController : MonoBehaviour
         move();
 
         RaycastHit2D hit = Physics2D.Raycast(rb.position - new Vector2(0, 0.5f), Vector2.down, 1f, LayerMask.GetMask("tilemap"));
-        
-        if (hit.distance < cc.radius - 0.1f)
+
+        if (hit.distance < cc.radius - 0.1f && hit.collider != null)
         {
             isGrounded = true;
         }
