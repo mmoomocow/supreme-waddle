@@ -6,20 +6,24 @@ public class playerController : MonoBehaviour
 {
 
     Rigidbody2D rb;
-    BoxCollider2D bc;
+    CircleCollider2D cc;
 
     [SerializeField] private Animator an;
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float acceleration = 5f;
+    [SerializeField] private float max_speed = 10f;
+    [SerializeField] private float stationary_friction = 0.8f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float x_bounds = 0.5f;
     [SerializeField] private float y_bounds = 0.5f;
+    [SerializeField] private float scale = 1f;
     private bool isGrounded = true;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        bc = GetComponent<BoxCollider2D>();
+        cc = GetComponent<CircleCollider2D>();
+        transform.localScale = new Vector3(scale, scale, scale);
     }
 
     // Update is called once per frame
@@ -37,25 +41,7 @@ public class playerController : MonoBehaviour
     void move()
     {
         float x = Input.GetAxis("Horizontal");
-        
-        if (x > 0 && transform.position.x < x_bounds)
-        {
-            transform.position += new Vector3(x * speed * Time.deltaTime, 0, 0);
-        }
-        else if (x < 0 && transform.position.x > -x_bounds)
-        {
-            transform.position += new Vector3(x * speed * Time.deltaTime, 0, 0);
-        }
-
-        // flip left/right
-        if (x > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (x < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
+        rb.velocity = new Vector2(x * acceleration, rb.velocity.y);
     }
 
     void jump()
