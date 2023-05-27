@@ -10,11 +10,7 @@ public class playerController : MonoBehaviour
 
     [SerializeField] private Animator an;
     [SerializeField] private float acceleration = 5f;
-    [SerializeField] private float max_speed = 10f;
-    [SerializeField] private float stationary_friction = 0.8f;
     [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float x_bounds = 0.5f;
-    [SerializeField] private float y_bounds = 0.5f;
     [SerializeField] private float scale = 1f;
     private bool isGrounded = true;
 
@@ -31,9 +27,17 @@ public class playerController : MonoBehaviour
     {
         move();
 
+        RaycastHit2D hit = Physics2D.Raycast(rb.position - new Vector2(0, 0.5f), Vector2.down);
+        
+        if (hit.distance < cc.radius - 0.1f)
+        {
+            isGrounded = true;
+        }
+        else isGrounded = false;
+
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            Debug.Log("jump 1");
             jump();
         }
     }
@@ -46,16 +50,6 @@ public class playerController : MonoBehaviour
 
     void jump()
     {
-        Debug.Log("jump 2");
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        isGrounded = false;
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
     }
 }
