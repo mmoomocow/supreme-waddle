@@ -5,8 +5,22 @@ using UnityEngine;
 public class God : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    private bool triggered = false;
-    private bool triggered_closer = false;
+    public bool triggered = false;
+    public bool triggered_closer = false;
+    public static God instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError("More than one God in the scene! Destroying self!");
+            Destroy(this);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +60,6 @@ public class God : MonoBehaviour
         UI_manager.instance.red_border.SetActive(true);
         // Set the objective text to Escape!
         UI_manager.instance.objective_text.text = "Escape!";
-        
     }
 
     private IEnumerator close_message()

@@ -9,6 +9,7 @@ public class Game_Manager : MonoBehaviour
     public static Game_Manager instance;
     public GameObject player;
     public GameObject god;
+    public bool gameover = false;
     private void Awake()
     {
         if (instance == null)
@@ -54,10 +55,34 @@ public class Game_Manager : MonoBehaviour
         StartCoroutine(close_message());
     }
 
+    public void timer_ran_out()
+    {
+        stranded();
+    }
+
     IEnumerator close_message()
     {
         yield return new WaitForSeconds(5);
         SceneManager.UnloadSceneAsync("angry god");
         unfreeze_player();
+        StartCoroutine(UI_manager.instance.start_timer(90));
+    }
+
+    public void saved()
+    {
+        if (gameover == false)
+        {
+            SceneManager.LoadScene("win ship", LoadSceneMode.Single);
+            gameover = true;
+        }
+    }
+
+    public void stranded()
+    {
+        if (gameover == false)
+        {
+            SceneManager.LoadScene("win stranded", LoadSceneMode.Single);
+            gameover = true;
+        }
     }
 }
