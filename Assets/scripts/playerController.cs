@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float scale = 1f;
     private bool isGrounded = true;
+    public bool frozen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (frozen) return;
         move();
 
         RaycastHit2D hit = Physics2D.Raycast(rb.position - new Vector2(0, 0.5f), Vector2.down, 1f, LayerMask.GetMask("tilemap"));

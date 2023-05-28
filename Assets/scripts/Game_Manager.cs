@@ -35,4 +35,29 @@ public class Game_Manager : MonoBehaviour
     {
         
     }
+
+    public void freeze_player()
+    {
+        player.GetComponent<playerController>().frozen = true;
+        // Remove any velocity
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    }
+
+    public void unfreeze_player()
+    {
+        player.GetComponent<playerController>().frozen = false;
+    }
+
+    public void display_message()
+    {
+        SceneManager.LoadScene("angry god", LoadSceneMode.Additive);
+        StartCoroutine(close_message());
+    }
+
+    IEnumerator close_message()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.UnloadSceneAsync("angry god");
+        unfreeze_player();
+    }
 }

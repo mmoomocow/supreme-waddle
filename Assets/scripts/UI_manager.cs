@@ -9,6 +9,7 @@ public class UI_manager : MonoBehaviour
     public static UI_manager instance;
 
     public TMPro.TextMeshProUGUI objective_text;
+    public TMPro.TextMeshProUGUI message_text;
 
     private void Awake()
     {
@@ -26,8 +27,9 @@ public class UI_manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Make the red border invisible and set the objective text to Explore!
         red_border.SetActive(false);
         objective_text.text = "Explore!";
+        // Hide the message text
+        message_text.gameObject.SetActive(false);
     }
 }

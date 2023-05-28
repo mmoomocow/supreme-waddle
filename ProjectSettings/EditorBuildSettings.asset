@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 34ec7dc30e04c8049b3355f33ffca213
+  - enabled: 1
+    path: Assets/Scenes/angry god.unity
+    guid: 452790b324bd7bb478f3ac5f7da4ae70
   m_configObjects: {}
