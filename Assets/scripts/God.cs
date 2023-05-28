@@ -6,7 +6,8 @@ public class God : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     private bool triggered = false;
-    
+    private bool triggered_closer = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +18,16 @@ public class God : MonoBehaviour
     void Update()
     {
         float player_distance = Vector3.Distance(player.transform.position, transform.position); 
-        if (player_distance > 13 && triggered == false)
+        // Debug.Log(player_distance);
+
+
+        if (player_distance < 15 && triggered_closer == false)
         {
             UI_manager.instance.message_text.gameObject.SetActive(true);
             UI_manager.instance.message_text.text = "Come Closer...";
+            StartCoroutine(close_message());
+            Debug.Log("Come Closer...");
+            triggered_closer = true;
         }
         else if (player_distance < 7 && triggered == false)
         {
