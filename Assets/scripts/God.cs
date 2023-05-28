@@ -37,10 +37,10 @@ public class God : MonoBehaviour
 
         if (player_distance < 15 && triggered_closer == false)
         {
+            // Debug.Log(UI_manager.instance);
             UI_manager.instance.message_text.gameObject.SetActive(true);
             UI_manager.instance.message_text.text = "Come Closer...";
             StartCoroutine(close_message());
-            Debug.Log("Come Closer...");
             triggered_closer = true;
         }
         else if (player_distance < 7 && triggered == false)

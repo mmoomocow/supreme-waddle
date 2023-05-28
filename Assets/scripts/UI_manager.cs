@@ -44,7 +44,6 @@ public class UI_manager : MonoBehaviour
         while (time > 0)
         {
             time -= Time.deltaTime;
-            Debug.Log(time);
             timer_text.text = time.ToString("F0");
             yield return null;
         }

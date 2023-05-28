@@ -8,7 +8,6 @@ public class playerController : MonoBehaviour
     Rigidbody2D rb;
     CircleCollider2D cc;
 
-    [SerializeField] private Animator an;
     [SerializeField] private float acceleration = 5f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float scale = 1f;
@@ -29,13 +28,27 @@ public class playerController : MonoBehaviour
         if (frozen) return;
         move();
 
-        RaycastHit2D hit = Physics2D.Raycast(rb.position - new Vector2(0, 0.5f), Vector2.down, 1f, LayerMask.GetMask("tilemap"));
+        // 3 raycasts to check if the player is grounded
+        float raycastDistance = cc.bounds.extents.y + 0.5f;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, 1 << LayerMask.NameToLayer("tilemap"));
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + new Vector3(cc.bounds.extents.x -0.4f, 0, 0), Vector2.down, raycastDistance, 1 << LayerMask.NameToLayer("tilemap"));
+        RaycastHit2D hit3 = Physics2D.Raycast(transform.position - new Vector3(cc.bounds.extents.x -0.4f, 0, 0), Vector2.down, raycastDistance, 1 << LayerMask.NameToLayer("tilemap"));
+        // Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.red);
+        // Debug.DrawRay(transform.position + new Vector3(cc.bounds.extents.x, 0, 0), Vector2.down * raycastDistance, Color.red);
+        // Debug.DrawRay(transform.position - new Vector3(cc.bounds.extents.x, 0, 0), Vector2.down * raycastDistance, Color.red);
 
-        if (hit.distance < cc.radius - 0.1f && hit.collider != null)
+        // Debug.Log(hit.collider);
+        // Debug.Log(hit2.collider);
+        // Debug.Log(hit3.collider);
+
+        if (hit.collider != null || hit2.collider != null || hit3.collider != null)
         {
             isGrounded = true;
         }
-        else isGrounded = false;
+        else
+        {
+            isGrounded = false;
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)

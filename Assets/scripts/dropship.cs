@@ -16,6 +16,7 @@ public class dropship : MonoBehaviour
     {
         float player_distance = Vector3.Distance(player.transform.position, transform.position);
         // Debug.Log(player_distance);
+        // Debug.Log(God.instance.triggered);
         if (God.instance.triggered && player_distance < 7)
         {
             Game_Manager.instance.saved();
